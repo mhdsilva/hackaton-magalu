@@ -1,10 +1,12 @@
 import re
 
 class DataTransformer:
-    def __init__(self, resource_mapping):
+    def __init__(self, resource_mapping, aws_data_source):
         self.resource_mapping = resource_mapping
+        self.aws_data_source = aws_data_source
 
-    def transform(self, aws_data_source):
+    def transform(self):
+        aws_data_source = self.aws_data_source
 
         data_source_type = list(aws_data_source.keys())[0]
         data_source_configs = aws_data_source[data_source_type]
@@ -28,7 +30,6 @@ class DataTransformer:
         return transformed_data_sources[0]
 
     def transform_aws_instance(self, data_source_name, attributes):
-
         mgc_data_source = {
             'data': {
                 'mgc_virtual_machine_instances': {
@@ -47,7 +48,6 @@ class DataTransformer:
         return mgc_data_source
 
     def transform_aws_s3_bucket(self, data_source_name, attributes):
-
         mgc_data_source = {
             'data': {
                 'mgc_object_storage_buckets': {
