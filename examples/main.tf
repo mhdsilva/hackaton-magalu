@@ -20,21 +20,14 @@ resource "aws_s3_bucket" "static_site_bucket" {
     }
 }
 
-resource "aws_s3_bucket_public_acess_block" "static_site_bucket" {
-    bucket = aws_s3_bucket.static_site_bucket.id
-
-    block_public_acls = false
-    block_public_policy = false
-    ignore_public_acls = false
-    restrict_public_bucket = false
-}
-
-resource "aws_s3_bucket_acl" "static_site_bucket" {
-    depends_on = [
-        aws_s3_bucket_public_acess_block.static_site_bucket,
-        aws_s3_bucket_ownership_controls.static_site_bucket,
-    ]
-
-    bucket = aws_s3_bucket.static_site_bucket.id
-    acl = "public-read"
+resource "aws_instance" "database_server" {
+  ami                         = "ami-0def12345abc67890"
+  instance_type               = "t2.medium"
+  key_name                    = "db-key"
+  associate_public_ip_address = false
+  subnet_id                   = "subnet-87654321"
+  vpc_security_group_ids      = ["sg-87654321"]
+  tags = {
+    Name = "DatabaseServer"
+  }
 }
