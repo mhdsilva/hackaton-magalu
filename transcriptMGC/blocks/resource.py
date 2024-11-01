@@ -35,12 +35,10 @@ class ResourceTransformer:
                 }
             }
 
-            # Configuração de rede
             network = {}
             associate_public_ip = attributes.get('associate_public_ip_address')
             network['associate_public_ip'] = associate_public_ip if associate_public_ip is not None else False
 
-            # Grupos de Segurança
             security_groups = attributes.get('vpc_security_group_ids', [])
             if security_groups:
                 network['interface'] = {
@@ -50,7 +48,6 @@ class ResourceTransformer:
             if network:
                 mgc_resource['mgc_virtual_machine_instances'][resource_name]['network'] = network
 
-            # Informar sobre atributos não mapeados
             known_attributes = {
                 'ami', 'instance_type', 'key_name',
                 'associate_public_ip_address', 'vpc_security_group_ids', 'tags'
@@ -77,7 +74,6 @@ class ResourceTransformer:
                 }
             }
 
-            # Controle de Acesso
             acl = attributes.get('acl', 'private')
             acl_mapping = {
                 'private': {'private': True},
@@ -94,7 +90,6 @@ class ResourceTransformer:
                 self.unmapped_attributes.append('acl')
                 mgc_resource['mgc_object_storage_buckets'][bucket_name]['private'] = True
 
-            # Informar sobre atributos não mapeados
             known_attributes = {'bucket', 'acl', 'versioning', 'tags'}
             extra_attributes = set(attributes.keys()) - known_attributes
             if extra_attributes:
