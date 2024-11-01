@@ -21,13 +21,12 @@ class DataTransformer:
 
     def transform_aws_ami(self, data_source_content):
         mgc_data_source = {
-            'data': {
                 'mgc_virtual_machine_images': {}
             }
-        }
+        
 
         for name, attributes in data_source_content.items():
-            mgc_data_source['data']['mgc_virtual_machine_images'][name] = {}
+            mgc_data_source['mgc_virtual_machine_images'][name] = {}
             if attributes:
                 print(f"A data source AWS 'aws_ami' '{name}' possui atributos que não são necessários para a MGC e serão ignorados: {list(attributes.keys())}")
                 self.unmapped_attributes.extend(attributes.keys())
@@ -36,14 +35,12 @@ class DataTransformer:
 
     def transform_aws_instance(self, data_source_content):
         mgc_data_source = {
-            'data': {
                 'mgc_virtual_machine_instances': {}
             }
-        }
 
         for name, attributes in data_source_content.items():
             instance_id = attributes.get('id', '')
-            mgc_data_source['data']['mgc_virtual_machine_instances'][name] = {
+            mgc_data_source['mgc_virtual_machine_instances'][name] = {
                 'id': instance_id
             }
 
