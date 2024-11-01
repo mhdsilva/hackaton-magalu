@@ -111,10 +111,10 @@ class TerraformInstance():
                     output_config['variable'][k] = i
 
         if self.datas:
-            output_config['output'] = {}
+            output_config['data'] = {}
             for d in self.datas:
                 for k, i in d.items():
-                    output_config['output'][k] = i
+                    output_config['data'][k] = i
 
         return output_config
 

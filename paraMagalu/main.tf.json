@@ -37,12 +37,9 @@
         }
     },
     "output": {
-        "mgc_virtual_machine_images": {
-            "ubuntu": {}
-        },
-        "mgc_virtual_machine_instances": {
-            "existing_instance": {
-                "id": ""
+        "output": {
+            "vm_images": {
+                "value": "${data.data.mgc_virtual_machine_images.ubuntu.images}"
             }
         }
     },
@@ -63,6 +60,16 @@
         "mgc_env": {
             "description": "Define o ambiente operacional.",
             "default": "prod"
+        }
+    },
+    "data": {
+        "mgc_virtual_machine_images": {
+            "ubuntu": {}
+        },
+        "mgc_virtual_machine_instances": {
+            "existing_instance": {
+                "id": ""
+            }
         }
     }
 }

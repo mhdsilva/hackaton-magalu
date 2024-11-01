@@ -30,8 +30,10 @@
         }
     },
     "output": {
-        "mgc_virtual_machine_images": {
-            "nginx": {}
+        "output": {
+            "web_security_group": {
+                "value": "${data.aws_security_group.existing_sg.name}"
+            }
         }
     },
     "variable": {
@@ -51,6 +53,11 @@
         "mgc_env": {
             "description": "Define o ambiente operacional.",
             "default": "prod"
+        }
+    },
+    "data": {
+        "mgc_virtual_machine_images": {
+            "nginx": {}
         }
     }
 }
