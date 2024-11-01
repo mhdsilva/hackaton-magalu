@@ -1,5 +1,6 @@
 import hcl2
 import json
+import os
 
 from transcriptMGC.blocks.provider import ProviderTransformer
 from transcriptMGC.blocks.resource import ResourceTransformer
@@ -117,6 +118,7 @@ class TerraformInstance():
         return output_config
 
     def dump_tf(self, path):
+        os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, 'w') as f:
 
             if self.provider:

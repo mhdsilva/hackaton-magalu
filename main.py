@@ -9,4 +9,4 @@ x = TerraformInstance('examples/main.tf')
 x.print_outputs()
 
 print('\n\n\n')
-x.dump_tf('examples/magalumain.tf.json')
+x.dump_tf('paraMagalu/main.tf.json')
