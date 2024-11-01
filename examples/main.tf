@@ -1,5 +1,5 @@
 provider "aws" {
-    region = "us-east-1"
+  region = "us-east-1"
 }
 
 variable "aws_access_key" {
@@ -30,17 +30,17 @@ variable "s3_bucket_name" {
 }
 
 resource "aws_s3_bucket" "static_site_bucket" {
-    bucket = "static-site-${var.s3_bucket_name}"
+  bucket = "static-site-${var.s3_bucket_name}"
 
-    website {
-        index_document = "index.html"
-        error_document = "404.html"
-    }
+  website {
+    index_document = "index.html"
+    error_document = "404.html"
+  }
 
-    tags = {
-        Name = "Static Site Bucket"
-        Environment = "Production"
-    }
+  tags = {
+    Name        = "Static Site Bucket"
+    Environment = "Production"
+  }
 }
 
 resource "aws_instance" "database_server" {
@@ -71,4 +71,16 @@ data "aws_instance" "existing_instance" {
 
 data "aws_s3_bucket" "existing_bucket" {
   bucket = aws_s3_bucket.static_site_bucket.bucket
+}
+
+output "vm_images" {
+  value = data.aws_ami.ubuntu.images
+}
+
+output "vm_instances" {
+  value = data.aws_instance.existing_instance
+}
+
+output "vm_bucket" {
+  value = data.aws_s3_bucket.existing_bucket
 }
