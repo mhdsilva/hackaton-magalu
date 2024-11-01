@@ -29,7 +29,7 @@ class ProviderTransformer:
             print("Nenhuma região especificada no provedor AWS. Usando a região padrão.")
 
         if 'access_key' in aws_config or 'secret_key' in aws_config:
-            print("As configurações 'access_key' e 'secret_key' não existe naMagalu Cloud e serão ignoradas.")
+            print("As configurações 'access_key' e 'secret_key' não existe na Magalu Cloud e serão ignoradas.")
             self.unmapped_configs.extend(['access_key', 'secret_key'])
 
         if 'profile' in aws_config:
