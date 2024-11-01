@@ -2,8 +2,31 @@ provider "aws" {
     region = "us-east-1"
 }
 
-variable "bucket_name" {
+variable "aws_access_key" {
+  description = "Chave de acesso da AWS."
+}
 
+variable "aws_secret_key" {
+  description = "Chave secreta da AWS."
+}
+
+variable "region" {
+  description = "Região da AWS."
+  default     = "us-east-1"
+}
+
+variable "instance_type" {
+  description = "Tipo de instância EC2."
+  default     = "t2.micro"
+}
+
+variable "ami" {
+  description = "ID da AMI para a instância EC2."
+}
+
+variable "s3_bucket_name" {
+  description = "Nome do bucket S3."
+  default     = "meu-bucket-app"
 }
 
 resource "aws_s3_bucket" "static_site_bucket" {
