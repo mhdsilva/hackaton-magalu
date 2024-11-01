@@ -90,20 +90,29 @@ class TerraformInstance():
             output_config['provider'] = self.provider
 
         if self.resources:
+            output_config['resource'] = {}
             for r in self.resources:
-                output_config['resource'] = r
+                for k, i in r.items():
+                    output_config['resource'][k] = i
 
         if self.outputs:
+            output_config['output'] = {}
             for o in self.outputs:
-                output_config['output'] = o
+                if o:
+                    for k, i in o.items():
+                        output_config['output'][k] = i
 
         if self.variables:
+            output_config['variable'] = {}
             for v in self.variables:
-                output_config['variable'] = v
+                for k, i in v.items():
+                    output_config['variable'][k] = i
 
         if self.datas:
+            output_config['output'] = {}
             for d in self.datas:
-                output_config['data'] = d
+                for k, i in d.items():
+                    output_config['output'][k] = i
 
         return output_config
 

@@ -6,6 +6,13 @@
     }
   },
   "resource":{
+    "mgc_object_storage_buckets":{
+      "static_site_bucket":{
+        "bucket":"static-site-${var.s3_bucket_name}",
+        "enable_versioning":false,
+        "private":true
+      }
+    },
     "mgc_virtual_machine_instances":{
       "database_server":{
         "name":"DatabaseServer",
@@ -29,11 +36,33 @@
       }
     }
   },
+  "output":{
+    "mgc_virtual_machine_images":{
+      "ubuntu":{ }
+    },
+    "mgc_virtual_machine_instances":{
+      "existing_instance":{
+        "id":""
+      }
+    }
+  },
   "variable":{
+    "mgc_api_key":{
+      "description":"API key para autenticação."
+    },
+    "mgc_obj_key_id":{
+      "description":"Key ID para acessar o produto de Object Storage."
+    },
+    "mgc_obj_key_secret":{
+      "description":"Secret da key para acessar o produto de Object Storage."
+    },
+    "mgc_region":{
+      "description":"Especifica a região onde os recursos serão criados e gerenciados.",
+      "default":"br-se1"
+    },
     "mgc_env":{
       "description":"Define o ambiente operacional.",
       "default":"prod"
     }
-  },
-  "data":{ }
+  }
 }
