@@ -30,7 +30,7 @@ variable "s3_bucket_name" {
 }
 
 resource "aws_s3_bucket" "static_site_bucket" {
-    bucket = "static-site-${var.bucket_name}"
+    bucket = "static-site-${var.s3_bucket_name}"
 
     website {
         index_document = "index.html"
@@ -39,7 +39,7 @@ resource "aws_s3_bucket" "static_site_bucket" {
 
     tags = {
         Name = "Static Site Bucket"
-        Enviroment = "Production"
+        Environment = "Production"
     }
 }
 
@@ -53,4 +53,22 @@ resource "aws_instance" "database_server" {
   tags = {
     Name = "DatabaseServer"
   }
+}
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"] # Canonical
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+}
+
+data "aws_instance" "existing_instance" {
+  instance_id = aws_instance.database_server.id
+}
+
+data "aws_s3_bucket" "existing_bucket" {
+  bucket = aws_s3_bucket.static_site_bucket.bucket
 }
