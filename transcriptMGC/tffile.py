@@ -120,4 +120,4 @@ class TerraformInstance():
         with open(path, 'w') as f:
 
             if self.provider:
-                json.dump(self._config_output(), f)
+                json.dump(self._config_output(), f, indent=4)

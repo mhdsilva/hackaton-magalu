@@ -1,68 +1,68 @@
 {
-  "provider":{
-    "mgc":{
-      "api_key":"${var.api_key}",
-      "region":"br-se1"
-    }
-  },
-  "resource":{
-    "mgc_object_storage_buckets":{
-      "static_site_bucket":{
-        "bucket":"static-site-${var.s3_bucket_name}",
-        "enable_versioning":false,
-        "private":true
-      }
-    },
-    "mgc_virtual_machine_instances":{
-      "database_server":{
-        "name":"DatabaseServer",
-        "machine_type":{
-          "name":"cloud-bs1.medium"
-        },
-        "image":{
-          "name":"cloud-ubuntu-22.04 LTS"
-        },
-        "ssh_key_name":"db-key",
-        "network":{
-          "associate_public_ip":false,
-          "interface":{
-            "security_groups":[
-              {
-                "id":"sg-87654321"
-              }
-            ]
-          }
+    "provider": {
+        "mgc": {
+            "api_key": "${var.api_key}",
+            "region": "br-se1"
         }
-      }
+    },
+    "resource": {
+        "mgc_object_storage_buckets": {
+            "static_site_bucket": {
+                "bucket": "static-site-${var.s3_bucket_name}",
+                "enable_versioning": false,
+                "private": true
+            }
+        },
+        "mgc_virtual_machine_instances": {
+            "database_server": {
+                "name": "DatabaseServer",
+                "machine_type": {
+                    "name": "cloud-bs1.medium"
+                },
+                "image": {
+                    "name": "cloud-ubuntu-22.04 LTS"
+                },
+                "ssh_key_name": "db-key",
+                "network": {
+                    "associate_public_ip": false,
+                    "interface": {
+                        "security_groups": [
+                            {
+                                "id": "sg-87654321"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "output": {
+        "mgc_virtual_machine_images": {
+            "ubuntu": {}
+        },
+        "mgc_virtual_machine_instances": {
+            "existing_instance": {
+                "id": ""
+            }
+        }
+    },
+    "variable": {
+        "mgc_api_key": {
+            "description": "API key para autentica\u00e7\u00e3o."
+        },
+        "mgc_obj_key_id": {
+            "description": "Key ID para acessar o produto de Object Storage."
+        },
+        "mgc_obj_key_secret": {
+            "description": "Secret da key para acessar o produto de Object Storage."
+        },
+        "mgc_region": {
+            "description": "Especifica a regi\u00e3o onde os recursos ser\u00e3o criados e gerenciados.",
+            "default": "br-se1"
+        },
+        "mgc_env": {
+            "description": "Define o ambiente operacional.",
+            "default": "prod"
+        }
     }
-  },
-  "output":{
-    "mgc_virtual_machine_images":{
-      "ubuntu":{ }
-    },
-    "mgc_virtual_machine_instances":{
-      "existing_instance":{
-        "id":""
-      }
-    }
-  },
-  "variable":{
-    "mgc_api_key":{
-      "description":"API key para autenticação."
-    },
-    "mgc_obj_key_id":{
-      "description":"Key ID para acessar o produto de Object Storage."
-    },
-    "mgc_obj_key_secret":{
-      "description":"Secret da key para acessar o produto de Object Storage."
-    },
-    "mgc_region":{
-      "description":"Especifica a região onde os recursos serão criados e gerenciados.",
-      "default":"br-se1"
-    },
-    "mgc_env":{
-      "description":"Define o ambiente operacional.",
-      "default":"prod"
-    }
-  }
 }
