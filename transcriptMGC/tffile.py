@@ -93,8 +93,9 @@ class TerraformInstance():
         if self.resources:
             output_config['resource'] = {}
             for r in self.resources:
-                for k, i in r.items():
-                    output_config['resource'][k] = i
+                if r:
+                    for k, i in r.items():
+                        output_config['resource'][k] = i
 
         if self.outputs:
             output_config['output'] = {}
